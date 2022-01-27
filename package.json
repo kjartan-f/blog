@@ -7,12 +7,17 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
-    "test": "NODE_ENV=test jest --verbose --runInBand"
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "start:test": "cross-env NODE_ENV=test node index.js",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "deploy": "git push heroku main",
+    "build:ui": "rm -rf build && cd ../bloglist-frontend/ && npm run build && cp -r build ../blog"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.6.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "jest": "^27.4.7",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.1"
